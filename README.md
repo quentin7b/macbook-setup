@@ -23,6 +23,7 @@ Simply setup my Android dev env with:
                             <li>Android Studio</li>
                             <li>Visual Studio Code</li>
                             <li>Postman</li>
+                            <li>java</li>
                         </ul>
                     </li>
                     <li>
@@ -31,6 +32,9 @@ Simply setup my Android dev env with:
                             <li>python</li>
                             <li>Fastlane</li>
                             <li>git</li>
+                            <li>node</li>
+                            <li>ionic</li>
+                            <li>cordova</li>
                         </ul>
                     </li>
                 </ul>
@@ -104,6 +108,9 @@ brew install python
 brew install python3
 brew install git
 brew install fastlane
+brew install node
+npm install -g ionic
+npm install -g cordova
 
 # Dev
 # Install casks
@@ -111,6 +118,7 @@ brew install fastlane
 brew cask install android-studio
 brew cask install visual-studio-code
 brew cask install postman
+brew cask install java8
 
 # Tools
 ## Install brews
@@ -151,12 +159,26 @@ git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh
 
 ### Configure your ZSH on steroids, *add these lines to your ~/.zshrc*
 
-
 ```bash
-plugins=(git colored-man colorize github jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git colored-man colorize github virtualenv pip python brew osx zsh-syntax-highlighting zsh-autosuggestions)
 
 ZSH_THEME="agnoster"
 DEFAULT_USER="yourusername"
+
+# User configuration
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
+# Path items
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.xxx.jdk/Contents/Home
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$GOPATH/bin:$ANDROID_HOME/platform-tools
+export PATH=$HOME/.fastlane/bin:$PATH
+
+# Commands
+brew-delete() {
+	brew cask remove "$1" && brew cask cleanup "$1"
+}
 ```
 
 ### Configure shell to use zsh, *type this line in your iTerm2 shell*

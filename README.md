@@ -1,91 +1,18 @@
+
 # My MacBook Pro setup
-  
+
 > Based on [https://clakech.github.io/macbook-pro-setup/](https://clakech.github.io/macbook-pro-setup/)
-> > Which "Mostly Follow [http://sourabhbajaj.com/mac-setup/index.html](http://sourabhbajaj.com/mac-setup/index.html)"
 
-Simply setup my Android dev env with:
-
-<table>
-    <thead>
-        <tr>
-            <th>Dev</th>
-            <th>Tools</th>
-            <th>Social</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <ul>
-                    <li>
-                        brew cask
-                        <ul>
-                            <li>Android Studio</li>
-                            <li>Visual Studio Code</li>
-                            <li>Postman</li>
-                            <li>java</li>
-                        </ul>
-                    </li>
-                    <li>
-                        brew 
-                        <ul>
-                            <li>python</li>
-                            <li>Fastlane</li>
-                            <li>git</li>
-                            <li>node</li>
-                            <li>ionic</li>
-                            <li>cordova</li>
-                        </ul>
-                    </li>
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    <li>
-                        brew cask
-                        <ul>
-                            <li>Android File Transfer</li>
-                            <li>Android Tool</li>
-                            <li>Google Chrome</li>
-                            <li>Shiftit</li>
-                            <li>LaunchRocket</li>
-                            <li>Flux</li>
-                            <li>Etcher</li> 
-                            <li>The unarchiver</li>
-                            <li>iTerm2</li>
-                            <li>Alfred</li>
-                        </ul>
-                    </li>
-                    <li>
-                        brew
-                    </li>
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    <li>
-                        brew cask
-                        <ul>
-                            <li>Slack</li>
-                            <li>Spotify</li>
-                            <li>Whatsapp</li>
-                            <li>Rocket</li>
-                        </ul>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
+>  > Which "Mostly Follow [http://sourabhbajaj.com/mac-setup/index.html](http://sourabhbajaj.com/mac-setup/index.html)"
 
 ## Install XCode, *on macOS, you can't dev without XCode*
 
 ```bash
 xcode-select --install
-``` 
+```
 
-## Install [HomeBrew](http://brew.sh/), *a tool to install CLI tools without copy/paste*  
+## Install [HomeBrew](http://brew.sh/), *a tool to install CLI tools without copy/paste*
+  
 
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -95,99 +22,137 @@ xcode-select --install
 
 ```bash
 brew tap caskroom/cask
+# For Java OpenJDK
+brew tap adoptopenjdk/openjdk
+# For MongoDB
+brew tap mongodb/brew
 ```
 
 ## Install tools for devs, *a short must have list*
 
 ```bash
+# First, update brew
+brew update
 
 # Dev
-## Install brews
+## Install tools
 
 brew install python
 brew install python3
 brew install git
-brew install fastlane
 brew install node
-npm install -g ionic
-npm install -g cordova
+brew install adoptopenjdk8
+# If you need them
+brew install adoptopenjdk11
+brew install adoptopenjdk13
 
 # Dev
-# Install casks
 
-brew cask install android-studio
-brew cask install visual-studio-code
-brew cask install postman
-brew cask install java8
+# Install Dev IDE/Editors
+
+brew install android-studio
+brew install intellij-idea-ce
+brew install visual-studio-code
+brew install postman
+  
 
 # Tools
-## Install brews
-## Install casks
 
-brew cask install android-file-transfer
-brew cask install androidtool
-brew cask install google-chrome
-brew cask install shiftit
-brew cask install launchrocket
-brew cask install flux
-brew cask install etcher
-brew cask install the-unarchiver
-brew cask install iterm2
-brew cask install alfred
+  
+
+brew install android-file-transfer
+brew install androidtool
+# Web browser
+brew install brave
+# Quick switch between screen
+brew install shiftit
+# Admin panel
+brew install launchrocket
+# Keep your eyes safe
+brew install flux
+# Brun your linux ISO on Usb keys
+brew install etcher
+# Unzip all the files
+brew install the-unarchiver
+# You'll live iterm2 with zsh
+brew install iterm2
+# A proxy ?
+brew install charles
 
 # Social
-## Install brews
-## Install casks
 
-brew cask install slack
-brew cask install spotify
-brew cask install whatsapp
-brew cask install rocket
+brew install slack
+brew install spotify
+brew install whatsapp
+brew install rocket
+brew install discord
 ```
 
-## Install ZSH & co, *the best shell suite for devs [#mustHave](https://github.com/robbyrussell/oh-my-zsh/wiki/Cheatsheet)*
+## Want a beautiful terminal ? Install ZSH & co, *the best shell suite for devs [#mustHave](https://github.com/robbyrussell/oh-my-zsh/wiki/Cheatsheet)*
 
 ```bash
 brew install zsh zsh-completions
 
 #install oh-my-zsh, a zsh configuration helper
+
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 #install auto suggestions plugin
+
 git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 ```
 
-### Configure your ZSH on steroids, *add these lines to your ~/.zshrc*
+### Configure your ZSH on steroids, *add these lines to your `~/.zshrc`*
+
+Open `~/.zshrc` and paste it into it
 
 ```bash
-plugins=(git colored-man colorize github virtualenv pip python brew osx zsh-syntax-highlighting zsh-autosuggestions)
-
+plugins=(git colorize brew osx zsh-autosuggestions)
+DEFAULT_USER="quentin"
 ZSH_THEME="agnoster"
-DEFAULT_USER="yourusername"
+
+export ZSH="/Users/$DEFAULT_USER/.oh-my-zsh"
+source $ZSH/oh-my-zsh.sh
+
+# Fastlane
+export LC_ALL=fr_FR.UTF-8
+export LANG=fr_FR.UTF-8
 
 # User configuration
-export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
-# Path items
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.xxx.jdk/Contents/Home
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$GOPATH/bin:$ANDROID_HOME/platform-tools
-export PATH=$HOME/.fastlane/bin:$PATH
 
-# Commands
-brew-delete() {
-	brew cask remove "$1" && brew cask cleanup "$1"
+export JDK_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home
+export JAVA_HOME=$JDK_HOME
+jdk() {
+        version=$1
+        export JDK_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-"$version".jdk/Contents/Home
+	export JAVA_HOME=$JDK_HOME;
+        java -version
 }
+
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export ANDROID_PLATFORM_TOOLS=$ANDROID_HOME/platform-tools
+export ANDROID_EMU=$ANDROID_HOME/emulator
+export ANDROID_TOOLS=$ANDROID_HOME/tools
+
+export FLUTTER_HOME=$HOME/Library/flutter
+export FLUTTER_BIN=$FLUTTER_HOME/bin
+export FLUTTER_CACHE=$HOME/.pub-cache/bin
+
+export PYTHON_BIN=/usr/local/opt/python/libexec/bin
+export TCL_TK_BIN=/usr/local/opt/tcl-tk/bin
+
+export PATH="$ANDROID_HOME:$ANDROID_PLATFORM_TOOLS:$ANDROID_EMU:$ANDROID_TOOLS:$FLUTTER_HOME:$FLUTTER_BIN:$FLUTTER_CACHE:$PYTHON_BIN:$TCL_TK_BIN:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 ```
 
 ### Configure shell to use zsh, *type this line in your iTerm2 shell*
 
 ```bash
 chsh -s /bin/zsh
-``` 
+```
 
 *Restart iTerm2*
+
 
 ### Configure iTerm2
 
@@ -223,35 +188,15 @@ rm -Rf ~/tempFonts
 git config --global user.name "Your Name Here"
 git config --global user.email "your_email@youremail.com"
 git config --global credential.helper osxkeychain
-
 #see all default oh-my-zsh git aliases https://github.com/robbyrussell/oh-my-zsh/wiki/Cheatsheet#git
 ```
+
 *Restart iTerm2*
-
-## Manage your dotFiles using git, *[because you may want to review history one day](http://dotfiles.github.io/)*
-
-```zsh
-#goto your home dir, using zsh no need to cd ~
-cd
-
-#create a git repo ignoring all files to avoid sharing sensistive stuff
-git init
-echo "*" > .gitignore
-
-#git force add file you WANT to manage
-ga -f .zshrc
-
-#git commit all added files, gca = git commit -v -a thanks to oh-my-zsh
-gca
-
-#optional but recommanded, if you setup a git remote to backup your files using github for instance
-git push origin master
-```
 
 ## update (most of) your dev tools, *in (almost) 1 line*
 
-```zsh
+```bash
 brew update && brew upgrade
-``` 
+```
 
 Please contribute to improve this and share it to the world if you like it 😉
